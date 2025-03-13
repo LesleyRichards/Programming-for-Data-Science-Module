@@ -15,6 +15,7 @@ print(b.dtype)
 # to print: dtype('float64')
 # example of WRONG code: a = np.array(1, 2, 3, 4)
 a = np.array([1, 2, 3, 4])  # RIGHT code, missing the [] to make it 1 sequence
+print(a)
 
 # to print: array([[1.5, 2. , 3. ], [4. , 5. , 6. ]])
 b = np.array([(1.5, 2, 3), (4, 5, 6)])
@@ -56,8 +57,8 @@ print(f)
 
 # basic operations
 a = np.array([20, 30, 40, 50])
-b = np.arange(4)
 print(a)
+b = np.arange(4)
 print(b)
 
 c = a - b
@@ -199,3 +200,53 @@ c = np.array([[[0, 1, 2],  # a 3D array (two stacked 2D arrays)
 print(c.shape)
 print(c[1, ...])  # same as c[1, :, :] or c[1]
 print(c[..., 2])  # same as c[:, :, 2])
+
+# Iterating over multidimensional arrays is done with respect to the first axis:
+for row in b:
+    print(row)
+
+# shape manipulation
+
+a = np.floor(10 * rg.random((3, 4)))
+# a
+# a.shape
+
+a.ravel()  # returns the array, flattened
+
+a.reshape(6, 2) # returns the array with a modified shape
+
+# a.T  # returns the array, transposed (changed position)
+
+# a.T.shape
+# a
+
+a.resize((2, 6))
+# a
+
+a.reshape(3, -1)
+
+# Stacking together different arrays
+
+a = np.floor(10 * rg.random((2, 2)))
+# a
+
+b = np.floor(10 * rg.random((2, 2)))
+# b
+
+np.vstack((a, b))
+
+np.hstack((a, b))
+
+# Splitting one array into several smaller ones
+
+a = np.floor(10 * rg.random((2, 12)))
+# a
+
+# Split `a` into 3
+np.hsplit(a, 3)
+
+# Split `a` after the third and the fourth column
+np.hsplit(a, (3, 4))
+
+# vsplit splits along the vertical axis, and array_split allows one to specify along which
+# axis to split
